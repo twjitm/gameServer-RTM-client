@@ -8,5 +8,13 @@
     <artifactId>gameServer-RTM-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <dependency>
+            <!--netty 4.1.6版本-->
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.6.Final</version>
+        </dependency>
+    </dependencies>
+
 </project>
