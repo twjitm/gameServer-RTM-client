@@ -29,13 +29,14 @@ public class TcpClientHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        SessionManager.getSingleton().setClient(new NetClient(ctx.channel(), runnable));
+        GameRtmClientManager.getSingleton().setClient(new NetClient(ctx.channel(), runnable));
+        System.out.println("初始化网恋连接");
     }
 
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
+        System.out.println("网络建立完成，可以进行数据传输");
     }
 
     /**
@@ -75,6 +76,6 @@ public class TcpClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         super.channelUnregistered(ctx);
-        SessionManager.getSingleton().getClient().getNetConnection().channelUnregistered();
+        GameRtmClientManager.getSingleton().getClient().getNetConnection().channelUnregistered();
     }
 }

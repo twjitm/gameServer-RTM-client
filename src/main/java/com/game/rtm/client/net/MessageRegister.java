@@ -16,9 +16,15 @@ import java.util.jar.JarFile;
  * @author twjitm 2019/4/15/23:24
  */
 public class MessageRegister {
-    protected static ConcurrentHashMap<Integer, IHandler> handlerMap = new ConcurrentHashMap<>();
+    protected static ConcurrentHashMap<Long, IHandler> handlerMap = new ConcurrentHashMap<>();
 
-    public static void register(int cmd, Class<? extends IHandler> clazz) {
+    /**
+     * 手动注入IHandler协议中的消息
+     *
+     * @param cmd
+     * @param clazz
+     */
+    public static void register(Long cmd, Class<? extends IHandler> clazz) {
         try {
             handlerMap.put(cmd, clazz.newInstance());
         } catch (InstantiationException | IllegalAccessException e) {
@@ -26,6 +32,30 @@ public class MessageRegister {
         }
 
     }
+
+    /**
+     * 自动注入IHandler协议中的消息
+     */
+    public static void autoRegister(String namespace) {
+        List<Class<?>> classList = null;
+        try {
+
+            classList = MessageRegister.scanRpcService(namespace, ".class", IHandler.class);
+
+            for (Class clazz : classList) {
+                try {
+                    IHandler handler = (IHandler) clazz.newInstance();
+                    handlerMap.put(handler.messageId(), handler);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    System.err.println(String.format("scan handler message error,%s", clazz.getName()));
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static IHandler getHandlerMap(int cmd) {
         return handlerMap.get(cmd);

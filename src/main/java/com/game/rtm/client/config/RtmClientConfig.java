@@ -8,6 +8,7 @@ public class RtmClientConfig {
     private String topic;
     private String serverHost;
     private long serverPort;
+    private String namespace;
 
     public String getTopic() {
         return topic;
@@ -31,5 +32,13 @@ public class RtmClientConfig {
 
     public void setServerPort(long serverPort) {
         this.serverPort = serverPort;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }

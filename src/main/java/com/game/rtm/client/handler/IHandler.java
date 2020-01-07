@@ -11,4 +11,6 @@ public interface IHandler {
 
     boolean verification(IMessage message);
 
+    long messageId();
+
 }

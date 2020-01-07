@@ -7,12 +7,12 @@ import io.netty.util.AttributeKey;
 /**
  * @author twjitm 2019/4/15/22:52
  */
-public class SessionManager {
+public class GameRtmClientManager {
     private NetClient client;
-    static final SessionManager singleton = new SessionManager();
+    private static final GameRtmClientManager SINGLETON = new GameRtmClientManager();
 
-    public static SessionManager getSingleton() {
-        return singleton;
+    public static GameRtmClientManager getSingleton() {
+        return SINGLETON;
     }
 
     public void setClient(NetClient client) {

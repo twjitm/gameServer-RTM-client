@@ -10,7 +10,7 @@ import io.netty.channel.ChannelHandlerContext;
 /**
  * @author by twjitm on 2019/3/25/11:40
  */
-public class MessageCoderFactory {
+class MessageCoderFactory {
 
     private static final MessageCoderFactory SINGLETON = new MessageCoderFactory();
 
