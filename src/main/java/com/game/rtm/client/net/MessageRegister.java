@@ -16,7 +16,7 @@ import java.util.jar.JarFile;
  * @author twjitm 2019/4/15/23:24
  */
 public class MessageRegister {
-    protected static ConcurrentHashMap<Long, IHandler> handlerMap = new ConcurrentHashMap<>();
+    protected static ConcurrentHashMap<Integer, IHandler> handlerMap = new ConcurrentHashMap<>();
 
     /**
      * 手动注入IHandler协议中的消息
@@ -24,7 +24,7 @@ public class MessageRegister {
      * @param cmd
      * @param clazz
      */
-    public static void register(Long cmd, Class<? extends IHandler> clazz) {
+    public static void register(Integer cmd, Class<? extends IHandler> clazz) {
         try {
             handlerMap.put(cmd, clazz.newInstance());
         } catch (InstantiationException | IllegalAccessException e) {
@@ -45,7 +45,7 @@ public class MessageRegister {
             for (Class clazz : classList) {
                 try {
                     IHandler handler = (IHandler) clazz.newInstance();
-                    handlerMap.put(handler.messageId(), handler);
+                    handlerMap.put((int) handler.messageId(), handler);
                 } catch (InstantiationException | IllegalAccessException e) {
                     System.err.println(String.format("scan handler message error,%s", clazz.getName()));
                     e.printStackTrace();

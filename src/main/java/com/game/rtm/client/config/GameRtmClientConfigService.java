@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class GameRtmClientConfigService {
 
-    private static GameRtmClientConfigService service = new GameRtmClientConfigService();
+    private final static GameRtmClientConfigService service = new GameRtmClientConfigService();
 
     private RtmClientConfig rtmClientConfig;
 

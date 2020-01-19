@@ -1,6 +1,7 @@
 package com.game.rtm.handler;
 
 import com.game.rtm.client.handler.AbstractHandler;
+import com.game.rtm.client.net.GameRtmClientManager;
 import com.game.rtm.client.net.message.IMessage;
 
 /**
@@ -14,7 +15,8 @@ public class AuthHandler extends AbstractHandler {
 
     @Override
     public void handler(IMessage message) {
-        System.out.println("收到来自远端服务器的消息" + message.messageId());
+        String data = "你好，服务器";
+        GameRtmClientManager.getSingleton().getClient().writeData(1, data.getBytes());
     }
 
     @Override

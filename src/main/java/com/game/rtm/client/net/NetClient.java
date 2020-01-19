@@ -13,7 +13,7 @@ public class NetClient {
         this.netConnection = netConnection;
     }
 
-    public void writeData(short cmd, int status, byte[] data) {
+    public void writeData(int cmd, int status, byte[] data) {
         if (!isConnection()) {
             return;
         }
@@ -22,7 +22,7 @@ public class NetClient {
 
     }
 
-    public void writeData(short cmd, byte[] data) {
+    public void writeData(int cmd, byte[] data) {
         writeData(cmd, 0, data);
     }
 

@@ -21,14 +21,14 @@ class MessageCoderFactory {
     /**
      * 编码
      */
-    public ByteBuf encode(short cmd, int status, byte[] data) {
+    public ByteBuf encode(int cmd, int status, byte[] data) {
         ByteBuf byteBuf = PooledByteBufAllocator.DEFAULT.directBuffer(13 + data.length);
         //协议头 2字节
         byteBuf.writeShort(2);
         //版本号 1字节
         byteBuf.writeByte(1);
         //设置消息id 2字节
-        byteBuf.writeShort(cmd);
+        byteBuf.writeInt(cmd);
         //设置状态 4字节
         byteBuf.writeInt(status);
         //数据长度 4字节
@@ -49,7 +49,7 @@ class MessageCoderFactory {
        IoMessage ioMessage = new IoMessage();
         int head = buff.readShort() & 0x0000FFFF;
         int version = buff.readByte() & 0x000000FF;
-        int cmd = buff.readShort() & 0x0000FFFF;
+        int cmd = buff.readInt() & 0x0000FFFF;
         int status = buff.readInt();
         int length = buff.readInt();
         byte[] bytes = new byte[length];
